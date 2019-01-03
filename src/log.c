@@ -37,7 +37,12 @@ gchar *log_append_trim_message(const gchar *string) {
 	if (string == NULL)
 		return NULL;
 	gchar **array = g_regex_split_simple("[\\r\\n]*(.*?)[\\n$]+", string, 0, 0);
+
+        if (array == NULL)
+             return NULL;
 	gchar *ret_val = g_strdup(array[0]);
+        if (ret_val == NULL)
+             return NULL;
 	g_strfreev(array);
 	if (*ret_val == 0) {
 		g_free(ret_val);
